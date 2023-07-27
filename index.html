@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laboratorio</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+            background-color: #C0C0C0; /* Fondo rosa */
+        }
+        h1 {
+            font-size: 14px;
+        }
+        form {
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            background-color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <h1>Laboratorio</h1>
+
+    <h2>Formulario de Doctores</h2>
+    <form id="doctorForm">
+        <label for="doctorFirstName">Nombre:</label>
+        <input type="text" id="doctorFirstName" name="doctorFirstName" required>
+
+        <label for="doctorLastName">Apellido:</label>
+        <input type="text" id="doctorLastName" name="doctorLastName" required>
+
+        <label for="doctorSpecialty">Especialidad:</label>
+        <select id="doctorSpecialty" name="doctorSpecialty" required>
+            <option value="Medicina general">Medicina general</option>
+            <option value="Cardiología">Cardiología</option>
+            <option value="Medicina interna">Medicina interna</option>
+            <option value="Dermatología">Dermatología</option>
+            <option value="Rehabilitación física">Rehabilitación física</option>
+            <option value="Psicología">Psicología</option>
+            <option value="Odontología">Odontología</option>
+            <option value="Radiología">Radiología</option>
+        </select>
+
+        <label for="doctorOffice">Consultorio:</label>
+        <input type="text" id="doctorOffice" name="doctorOffice" required>
+
+        <label for="doctorEmail">Correo de contacto:</label>
+        <input type="email" id="doctorEmail" name="doctorEmail" required>
+
+        <button type="button" onclick="validateDoctorForm()">Agregar Doctor</button>
+    </form>
+
+    <h2>Formulario de Pacientes</h2>
+    <form id="patientForm">
+        <label for="patientFirstName">Nombre:</label>
+        <input type="text" id="patientFirstName" name="patientFirstName" required>
+
+        <label for="patientLastName">Apellido:</label>
+        <input type="text" id="patientLastName" name="patientLastName" required>
+
+        <label for="patientID">Número de cédula:</label>
+        <input type="text" id="patientID" name="patientID" required>
+
+        <label for="patientAge">Edad:</label>
+        <input type="number" id="patientAge" name="patientAge" required>
+
+        <label for="patientPhone">Teléfono:</label>
+        <input type="tel" id="patientPhone" name="patientPhone" required>
+
+        <button type="button" onclick="validatePatientForm()">Agregar Paciente</button>
+    </form>
+
+    <h2>Formulario de Citas Médicas</h2>
+    <form id="appointmentForm">
+        <label for="appointmentPatientID">Número documento paciente:</label>
+        <input type="text" id="appointmentPatientID" name="appointmentPatientID" required>
+
+        <label for="appointmentSpecialty">Especialidad:</label>
+        <select id="appointmentSpecialty" name="appointmentSpecialty" required>
+            <option value="Medicina general">Medicina general</option>
+            <option value="Cardiología">Cardiología</option>
+            <option value="Medicina interna">Medicina interna</option>
+            <option value="Dermatología">Dermatología</option>
+            <option value="Rehabilitación física">Rehabilitación física</option>
+            <option value="Psicología">Psicología</option>
+            <option value="Odontología">Odontología</option>
+            <option value="Radiología">Radiología</option>
+        </select>
+
+        <button type="button" onclick="validateAppointmentForm()">Asignar Cita</button>
+    </form>
+
+    <script>
+        function isValidEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+
+        function validateDoctorForm() {
+            const firstName = document.getElementById("doctorFirstName").value.trim();
+            const lastName = document.getElementById("doctorLastName").value.trim();
+            const specialty = document.getElementById("doctorSpecialty").value;
+            const office = document.getElementById("doctorOffice").value.trim();
+            const email = document.getElementById("doctorEmail").value.trim();
+
+            if (firstName === "" || lastName === "" || office === "" || email === "") {
+                alert("Por favor, complete todos los campos.");
+                return false;
+            }
+
+            if (!isValidEmail(email)) {
+                alert("Ingrese un correo válido.");
+                return false;
+            }
+
+            alert("Doctor agregado exitosamente.");
+            // Aquí puedes agregar el código para enviar el formulario al servidor y almacenar los datos en la base de datos.
+        }
+
+        function validatePatientForm() {
+            const firstName = document.getElementById("patientFirstName").value.trim();
+            const lastName = document.getElementById("patientLastName").value.trim();
+            const patientID = document.getElementById("patientID").value.trim();
+            const patientAge = document.getElementById("patientAge").value.trim();
+            const patientPhone = document.getElementById("patientPhone").value.trim();
+
+            if (firstName === "" || lastName === "" || patientID === "" || patientAge === "" || patientPhone === "") {
+                alert("Por favor, complete todos los campos.");
+                return false;
+            }
+
+            alert("Paciente agregado exitosamente.");
+            // Aquí puedes agregar el código para enviar el formulario al servidor y almacenar los datos en la base de datos.
+        }
+
+        function validateAppointmentForm() {
+            const patientID = document.getElementById("appointmentPatientID").value.trim();
+
+            if (patientID === "") {
+                alert("Por favor, ingrese el número de documento del paciente.");
+                return false;
+            }
+
+            alert("Cita médica asignada exitosamente.");
+            // Aquí puedes agregar el código para enviar el formulario al servidor y almacenar los datos en la base de datos.
+        }
+    </script>
+</body>
+</html>
